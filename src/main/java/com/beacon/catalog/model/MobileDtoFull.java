@@ -1,5 +1,6 @@
 package com.beacon.catalog.model;
 
+import com.beacon.catalog.tools.ToStringTool;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -196,47 +197,7 @@ public class MobileDtoFull extends MobileDto {
 
     @Override
     public String toString() {
-        return "MobileDtoFull{" +
-                "releaseYear='" + releaseYear + '\'' +
-                ", type='" + type + '\'' +
-                ", osVersion='" + osVersion + '\'' +
-                ", processorClockFrequency=" + processorClockFrequency +
-                ", coresNumber=" + coresNumber +
-                ", technicalProcess=" + technicalProcess +
-                ", housingMaterial='" + housingMaterial + '\'' +
-                ", simFormat='" + simFormat + '\'' +
-                ", length=" + length +
-                ", width=" + width +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", mainCamerasNumber=" + mainCamerasNumber +
-                ", builtInFlash=" + builtInFlash +
-                ", automaticFocus=" + automaticFocus +
-                ", opticalStabilization=" + opticalStabilization +
-                ", mainCamera=" + mainCamera +
-                ", mainCameraAperture='" + mainCameraAperture + '\'' +
-                ", frontCamera=" + frontCamera +
-                ", frontCameraResolution='" + frontCameraResolution + '\'' +
-                ", frontCameraAperture='" + frontCameraAperture + '\'' +
-                ", gps=" + gps +
-                ", glonass=" + glonass +
-                ", beidou=" + beidou +
-                ", edge=" + edge +
-                ", hspa=" + hspa +
-                ", hspaPlus=" + hspaPlus +
-                ", lte=" + lte +
-                ", fiveG=" + fiveG +
-                ", bluetooth=" + bluetooth +
-                ", bluetoothVersion='" + bluetoothVersion + '\'' +
-                ", audioOutput=" + audioOutput +
-                ", audioOutputVersion='" + audioOutputVersion + '\'' +
-                ", wifi=" + wifi +
-                ", wifiVersion='" + wifiVersion + '\'' +
-                ", connection='" + connection + '\'' +
-                ", nfc=" + nfc +
-                ", batteryType='" + batteryType + '\'' +
-                ", chargeTime='" + chargeTime + '\'' +
-                "} " + super.toString();
+        return new ToStringTool<>(this).getString();
     }
 
     @Override

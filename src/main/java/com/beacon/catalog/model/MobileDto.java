@@ -1,5 +1,6 @@
 package com.beacon.catalog.model;
 
+import com.beacon.catalog.tools.ToStringTool;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -91,22 +92,7 @@ public class MobileDto {
 
     @Override
     public String toString() {
-        return "MobileDto{" +
-                "mobileId='" + mobileId + '\'' +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", os='" + os + '\'' +
-                ", screenSize='" + screenSize + '\'' +
-                ", displayResolution='" + displayResolution + '\'' +
-                ", displayTechnology='" + displayTechnology + '\'' +
-                ", ram=" + ram +
-                ", storageCapacity=" + storageCapacity +
-                ", chipsetModel='" + chipsetModel + '\'' +
-                ", cameraResolution='" + cameraResolution + '\'' +
-                ", simCardSlot='" + simCardSlot + '\'' +
-                ", battery=" + battery +
-                ", color='" + color + '\'' +
-                '}';
+        return new ToStringTool<>(this).getString();
     }
 
     @Override
