@@ -19,6 +19,7 @@ public class ToStringTool<T> {
 
     public String getString() {
         StringBuilder result = new StringBuilder(className.getName() + "{\n");
+        result.append(String.format("%-12s%-15s%-12s%-15s%s%n%s%s%n", "\t|", "Fields", "|", "Values", "|", "\t", "=".repeat(54)));
 
         Class currentClass = className;
         while (!currentClass.equals(Object.class)) {
@@ -26,7 +27,7 @@ public class ToStringTool<T> {
             for (Field field : fields) {
                 try {
                     field.setAccessible(true);
-                    result.append(String.format("%25s:%25s%n", field.getName(), field.get(object)));
+                    result.append(String.format("%-2s%-25s%-2s%-25s%s%n", "\t|", field.getName(), "|", field.get(object), "|"));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
