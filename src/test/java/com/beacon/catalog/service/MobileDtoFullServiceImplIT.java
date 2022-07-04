@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class MobileDtoFullServiceImplIT {
@@ -15,17 +15,20 @@ public class MobileDtoFullServiceImplIT {
     MobileDtoFullService mobileDtoFullService;
 
     @Test
-    public void findAllMobileDtoFull() {
-        List<MobileDtoFull> list = mobileDtoFullService.findAllMobileDtoFull();
-        Assertions.assertNotNull(list);
+    public void findMobileDtoFullById() {
+        Optional<MobileDtoFull> optionalMobileDtoFull = mobileDtoFullService.findMobileDtoFullById("honor508128black");
+        Assertions.assertTrue(optionalMobileDtoFull.isPresent());
         //if it doesn't pass, see import.sql
-        Assertions.assertEquals(2, list.size());
-        Assertions.assertEquals("honor508128black", list.get(0).getMobileId());
-        Assertions.assertEquals("honor", list.get(0).getBrand());
-        Assertions.assertEquals("50", list.get(0).getModel());
-        Assertions.assertEquals("pocox3pro8256green", list.get(1).getMobileId());
-        Assertions.assertEquals("green", list.get(1).getColor());
-        System.out.println(list.get(0).toString());
-        System.out.println(list.get(1).toString());
+        Assertions.assertEquals("honor508128black", optionalMobileDtoFull.get().getMobileId());
+        Assertions.assertEquals("honor", optionalMobileDtoFull.get().getBrand());
+        Assertions.assertEquals("50", optionalMobileDtoFull.get().getModel());
+        Assertions.assertEquals(MobileDtoFull.class, optionalMobileDtoFull.get().getClass());
+        System.out.println(optionalMobileDtoFull.get().toString());
+    }
+
+    @Test
+    public void doesntFindAnyMobileDtoFullById_returnEmpty() {
+        Optional<MobileDtoFull> optionalMobileDtoFull = mobileDtoFullService.findMobileDtoFullById("1");
+        Assertions.assertTrue(optionalMobileDtoFull.isEmpty());
     }
 }

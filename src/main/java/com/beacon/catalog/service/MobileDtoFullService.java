@@ -2,7 +2,7 @@ package com.beacon.catalog.service;
 
 import com.beacon.catalog.model.MobileDtoFull;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * The service layout is to use one transaction for several connection to a database if it is needed.
@@ -11,8 +11,9 @@ import java.util.List;
 public interface MobileDtoFullService {
 
     /**
-     * Find all mobile dtos with full information in a database.
-     * @return list with {@link MobileDtoFull} models.
+     * Find a mobile dto with full information by mobile id in a database.
+     * @param mobileId - id string of a mobile model.
+     * @return optional with {@link MobileDtoFull} model.
      */
-    List<MobileDtoFull> findAllMobileDtoFull();
+    Optional<MobileDtoFull> findMobileDtoFullById(String mobileId);
 }

@@ -15,7 +15,7 @@ public class MobileDtoServiceImplIT {
     MobileDtoService mobileDtoService;
 
     @Test
-    public void findAllMobileDtoFull() {
+    public void findAllMobileDto() {
         List<MobileDto> list = mobileDtoService.findAllMobileDtos();
         Assertions.assertNotNull(list);
         //if it doesn't pass, see import.sql
@@ -25,6 +25,7 @@ public class MobileDtoServiceImplIT {
         Assertions.assertEquals("50", list.get(0).getModel());
         Assertions.assertEquals("pocox3pro8256green", list.get(1).getMobileId());
         Assertions.assertEquals("green", list.get(1).getColor());
+        Assertions.assertEquals(MobileDto.class, list.get(0).getClass());
         System.out.println(list.get(0).toString());
         System.out.println(list.get(1).toString());
     }

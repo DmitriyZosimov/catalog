@@ -5,7 +5,7 @@ import com.beacon.catalog.model.MobileDtoFull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * Default implementation of {@link MobileDtoFullService}
@@ -20,9 +20,9 @@ public class MobileDtoFullServiceImpl implements MobileDtoFullService {
         this.mobileDtoFullDao = mobileDtoFullDao;
     }
 
-    @Transactional(readOnly = true)
+
     @Override
-    public List<MobileDtoFull> findAllMobileDtoFull() {
-        return mobileDtoFullDao.findAll();
+    public Optional<MobileDtoFull> findMobileDtoFullById(String mobileId) {
+        return mobileDtoFullDao.findById(mobileId);
     }
 }
