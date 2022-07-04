@@ -20,12 +20,14 @@ public class MobileDtoFullController {
 
     /**
      * Get mobile dto with full description by mobile id. If this mobile does not exist, return 404 status.
-     * @param mobileId is used to search by id in DB.
+     * @param brand is a brand field and also the first part of mobileId.
+     * @param id is the second part of mobileId.
      * @return mobile dto with full description or status 404
      */
-    @GetMapping("/{id}")
-    public ResponseEntity findMobileDtoFullById(@PathVariable(name = "id") String mobileId) {
-        Optional<MobileDtoFull> mobileDtoFull = mobileDtoFullService.findMobileDtoFullById(mobileId);
+    @GetMapping("/{brand}/{id}")
+    public ResponseEntity findMobileDtoFullById(@PathVariable(name = "brand") String brand,
+                                                @PathVariable(name = "id") String id) {
+        Optional<MobileDtoFull> mobileDtoFull = mobileDtoFullService.findMobileDtoFullById(brand + id);
         return ResponseEntity.of(mobileDtoFull);
     }
 }

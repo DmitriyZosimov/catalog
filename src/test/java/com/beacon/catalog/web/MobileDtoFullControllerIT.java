@@ -48,7 +48,7 @@ public class MobileDtoFullControllerIT {
 
     @Test
     public void findMobileDtoFullById_statusOK() throws Exception {
-        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get(MOBILE_ID_URL + "honor508128black")
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get(MOBILE_ID_URL + "honor/508128black")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse();
@@ -65,7 +65,7 @@ public class MobileDtoFullControllerIT {
 
     @Test
     public void notFindMobileDtoFullById_statusNotFound() throws Exception {
-        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get(MOBILE_ID_URL + "1")
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get(MOBILE_ID_URL + "1/2")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isNotFound()).andReturn().getResponse();
         Assertions.assertNotNull(response);
