@@ -1,6 +1,7 @@
 package com.beacon.catalog.model;
 
 import com.beacon.catalog.tools.ToStringTool;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +20,7 @@ import javax.persistence.*;
 public class MobileDto {
 
     @Id
-    @Column(name = "mobile_id", nullable = false)
+    @Column(name = "mobile_id", nullable = false, unique = true)
     private String mobileId;
 
     @Column(name = "brand", nullable = false)
@@ -60,6 +61,10 @@ public class MobileDto {
 
     @Column(name = "color")
     private String color;
+
+    @OneToOne(mappedBy = "mobileDto", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private MobileMainImage mainImage;
 
     @Override
     public boolean equals(Object o) {

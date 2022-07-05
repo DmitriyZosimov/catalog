@@ -1,12 +1,13 @@
 package com.beacon.catalog.model;
 
 import com.beacon.catalog.tools.ToStringTool;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Contains additional information of mobile.
@@ -134,6 +135,11 @@ public class MobileDtoFull extends MobileDto {
 
     @Column(name = "charge_time")
     private String chargeTime;
+
+    @OneToMany(mappedBy = "mobileDtoFull", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Where(clause = "main=2")
+    @JsonManagedReference
+    private List<MobileNotMainImage> notMainImages;
 
     @Override
     public boolean equals(Object o) {
