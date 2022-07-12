@@ -1,6 +1,8 @@
 package com.beacon.catalog.web;
 
+import com.beacon.catalog.TestMobileDtoFulBuilder;
 import com.beacon.catalog.model.MobileDtoFull;
+import com.beacon.catalog.tools.MobileIdToUrlPathConverter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -26,9 +29,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MobileDtoFullControllerIT {
+public class MobileDtoFullControllerIT implements TestMobileDtoFulBuilder {
 
     private static final String MOBILE_ID_URL = "/mobile/";
+    private static final String FULL_MOBILE_ID_URL = "http://localhost/mobile/";
 
     @Autowired
     MobileDtoFullController mobileDtoFullController;
@@ -70,5 +74,47 @@ public class MobileDtoFullControllerIT {
                 .andExpect(MockMvcResultMatchers.status().isNotFound()).andReturn().getResponse();
         Assertions.assertNotNull(response);
         Assertions.assertEquals(404, response.getStatus());
+    }
+
+    @DirtiesContext
+    @Test
+    public void createNewMobileDtoFull_statusCreated() throws Exception {
+        MobileDtoFull mobileDtoFull = build();
+        mobileDtoFull.setMobileId(null);
+        mobileDtoFull.getMainImage().setMobileDto(null);
+        mobileDtoFull.getNotMainImages().forEach(image -> image.setMobileDtoFull(null));
+        String json = objectMapper.writeValueAsString(mobileDtoFull);
+
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post(MOBILE_ID_URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andReturn().getResponse();
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(201, response.getStatus());
+        Assertions.assertEquals(FULL_MOBILE_ID_URL + MobileIdToUrlPathConverter.convert(build()),
+                response.getRedirectedUrl());
+    }
+
+    @DirtiesContext
+    @Test
+    public void createNewMobileDtoFull_WithoutImages_statusCreated() throws Exception {
+        MobileDtoFull mobileDtoFull = build();
+        mobileDtoFull.setMobileId(null);
+        mobileDtoFull.setMainImage(null);
+        mobileDtoFull.setNotMainImages(null);
+        String json = objectMapper.writeValueAsString(mobileDtoFull);
+
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post(MOBILE_ID_URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andReturn().getResponse();
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(201, response.getStatus());
+        Assertions.assertEquals(FULL_MOBILE_ID_URL + MobileIdToUrlPathConverter.convert(build()),
+                response.getRedirectedUrl());
     }
 }
