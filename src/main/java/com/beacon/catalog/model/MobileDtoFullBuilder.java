@@ -1,5 +1,11 @@
 package com.beacon.catalog.model;
 
+import java.io.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * MobileDtoFullBuilder is helpful for creating test.
  */
@@ -59,6 +65,8 @@ public class MobileDtoFullBuilder {
     private Boolean nfc;
     private String batteryType;
     private String chargeTime;
+    private MobileMainImage mainImage;
+    private List<MobileNotMainImage> notMainImages;
     
     public static MobileDtoFullBuilder create() {
         return INSTANCE;
@@ -329,6 +337,21 @@ public class MobileDtoFullBuilder {
         return INSTANCE;
     }
 
+    public MobileDtoFullBuilder setMainImage(File file) {
+        this.mainImage = new MobileMainImage();
+        this.mainImage.setImage(readImage(file));
+        return INSTANCE;
+    }
+
+    public MobileDtoFullBuilder setNotMainImages(File ... files) {
+        this.notMainImages = Arrays.stream(files).map(file -> {
+            MobileNotMainImage image = new MobileNotMainImage();
+            image.setImage(readImage(file));
+            return image;
+        }).collect(LinkedList::new, LinkedList::offer, LinkedList::addAll);
+        return INSTANCE;
+    }
+
     public MobileDtoFull build() {
         MobileDtoFull mobileDtoFull = new MobileDtoFull();
         mobileDtoFull.setMobileId(this.mobileId);
@@ -384,6 +407,23 @@ public class MobileDtoFullBuilder {
         mobileDtoFull.setNfc(this.nfc);
         mobileDtoFull.setBatteryType(this.batteryType);
         mobileDtoFull.setChargeTime(this.chargeTime);
+        mobileDtoFull.setMainImage(this.mainImage);
+        this.mainImage.setMobileDto(mobileDtoFull);
+
+        mobileDtoFull.setNotMainImages(this.notMainImages);
+        this.notMainImages.forEach(image -> image.setMobileDtoFull(mobileDtoFull));
         return mobileDtoFull;
+    }
+
+    private byte[] readImage(File file) {
+        byte[] image = null;
+        try(BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
+            image = inputStream.readAllBytes();
+        } catch (FileNotFoundException e) {
+            System.err.println("File was not found: " + e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
     }
 }

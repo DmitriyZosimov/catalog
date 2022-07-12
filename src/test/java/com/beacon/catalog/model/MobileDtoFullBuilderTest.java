@@ -3,6 +3,8 @@ package com.beacon.catalog.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 public class MobileDtoFullBuilderTest {
 
     private final String mobileId = "mobileId";
@@ -58,7 +60,10 @@ public class MobileDtoFullBuilderTest {
     private final Boolean nfc = true;
     private final String batteryType = "batteryType";
     private final String chargeTime = "chargeTime";
-    
+    private final File FIRST_IMAGE = new File("src/test/resources/img/sample-phone.jpeg");
+    private final File SECOND_IMAGE = new File("src/test/resources/img/sample-phone-2.jpeg");
+    private final File THIRD_IMAGE = new File("src/test/resources/img/sample-phone-3.jpeg");
+
     @Test
     public void testCreatingMobileDtoFullByBuilder() {
         MobileDtoFull mobileDtoFull = MobileDtoFullBuilder.create()
@@ -115,6 +120,8 @@ public class MobileDtoFullBuilderTest {
                 .setNfc(this.nfc)
                 .setBatteryType(this.batteryType)
                 .setChargeTime(this.chargeTime)
+                .setMainImage(FIRST_IMAGE)
+                .setNotMainImages(SECOND_IMAGE, THIRD_IMAGE)
                 .build();
         
         Assertions.assertEquals(this.mobileId, mobileDtoFull.getMobileId());
@@ -170,5 +177,12 @@ public class MobileDtoFullBuilderTest {
                 Assertions.assertEquals(this.nfc , mobileDtoFull.getNfc());
                 Assertions.assertEquals(this.batteryType , mobileDtoFull.getBatteryType());
                 Assertions.assertEquals(this.chargeTime , mobileDtoFull.getChargeTime());
+                Assertions.assertNotNull(mobileDtoFull.getMainImage());
+                Assertions.assertEquals(mobileDtoFull, mobileDtoFull.getMainImage().getMobileDto());
+                Assertions.assertNotNull(mobileDtoFull.getNotMainImages());
+                mobileDtoFull.getNotMainImages().forEach(image -> {
+                    Assertions.assertEquals(mobileDtoFull, image.getMobileDtoFull());
+                });
+
     }
 }
