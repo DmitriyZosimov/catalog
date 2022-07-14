@@ -1,7 +1,7 @@
 package com.beacon.catalog.dao;
 
-import com.beacon.catalog.model.MobileDtoFull;
-import com.beacon.catalog.model.MobileNotMainImage;
+import com.beacon.model.MobileDtoFull;
+import com.beacon.model.MobileNotMainImage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

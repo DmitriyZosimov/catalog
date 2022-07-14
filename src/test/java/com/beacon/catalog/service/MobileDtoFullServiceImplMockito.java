@@ -1,7 +1,7 @@
 package com.beacon.catalog.service;
 
 import com.beacon.catalog.dao.MobileDtoFullDao;
-import com.beacon.catalog.model.MobileDtoFull;
+import com.beacon.model.MobileDtoFull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

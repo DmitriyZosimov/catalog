@@ -1,6 +1,6 @@
 package com.beacon.catalog.dao;
 
-import com.beacon.catalog.model.MobileDto;
+import com.beacon.model.MobileDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

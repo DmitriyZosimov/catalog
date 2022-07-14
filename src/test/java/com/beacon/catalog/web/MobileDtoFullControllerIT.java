@@ -1,8 +1,8 @@
 package com.beacon.catalog.web;
 
 import com.beacon.catalog.TestMobileDtoFulBuilder;
-import com.beacon.catalog.model.MobileDtoFull;
-import com.beacon.catalog.tools.MobileIdToUrlPathConverter;
+import com.beacon.model.MobileDtoFull;
+import com.beacon.model.tools.MobileIdToUrlPathConverter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

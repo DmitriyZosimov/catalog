@@ -1,6 +1,6 @@
 package com.beacon.catalog.service;
 
-import com.beacon.catalog.model.MobileDtoFull;
+import com.beacon.model.MobileDtoFull;
 
 import java.util.Optional;
 

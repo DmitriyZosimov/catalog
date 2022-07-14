@@ -1,7 +1,7 @@
 package com.beacon.catalog;
 
-import com.beacon.catalog.model.MobileDtoFull;
-import com.beacon.catalog.model.MobileDtoFullBuilder;
+import com.beacon.model.MobileDtoFull;
+import com.beacon.model.MobileDtoFullBuilder;
 
 import java.io.File;
 

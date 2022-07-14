@@ -1,8 +1,8 @@
 package com.beacon.catalog.web;
 
-import com.beacon.catalog.model.MobileDtoFull;
+import com.beacon.model.MobileDtoFull;
 import com.beacon.catalog.service.MobileDtoFullService;
-import com.beacon.catalog.tools.MobileIdToUrlPathConverter;
+import com.beacon.model.tools.MobileIdToUrlPathConverter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

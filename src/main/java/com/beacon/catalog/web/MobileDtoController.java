@@ -1,6 +1,6 @@
 package com.beacon.catalog.web;
 
-import com.beacon.catalog.model.MobileDto;
+import com.beacon.model.MobileDto;
 import com.beacon.catalog.service.MobileDtoService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

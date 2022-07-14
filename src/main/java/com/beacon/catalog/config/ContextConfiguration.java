@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan(basePackages = {"com.beacon.catalog"})
 @EnableJpaRepositories(basePackages = {"com.beacon.catalog.dao"})
-@EntityScan(basePackages = "com.beacon.catalog.model")
+@EntityScan(basePackages = "com.beacon.model")
 public class ContextConfiguration {
 
 

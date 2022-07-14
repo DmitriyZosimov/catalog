@@ -1,7 +1,7 @@
 package com.beacon.catalog.service;
 
 import com.beacon.catalog.TestMobileDtoFulBuilder;
-import com.beacon.catalog.model.MobileDtoFull;
+import com.beacon.model.MobileDtoFull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

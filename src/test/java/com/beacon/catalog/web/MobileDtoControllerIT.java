@@ -1,6 +1,6 @@
 package com.beacon.catalog.web;
 
-import com.beacon.catalog.model.MobileDto;
+import com.beacon.model.MobileDto;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

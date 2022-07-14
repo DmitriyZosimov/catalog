@@ -1,7 +1,7 @@
 package com.beacon.catalog.service;
 
 import com.beacon.catalog.dao.MobileDao;
-import com.beacon.catalog.model.MobileDto;
+import com.beacon.model.MobileDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,6 @@
 package com.beacon.catalog.dao;
 
-import com.beacon.catalog.model.MobileDtoFull;
+import com.beacon.model.MobileDtoFull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
